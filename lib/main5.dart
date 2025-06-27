@@ -2,13 +2,27 @@
 
 /*
 * Formulários
-* Passo 4) Validação dos campos e processamento do formulário
-* Linhas 10, 224 até o final
+* Passo 5) Processamento do formulário e envio do JSON para a API
 */
 
 // Importa o pacote de materiais do Flutter, que contém widgets e temas prontos.
 import 'package:flutter/foundation.dart'; // Importa para usar kDebugMode para depuração.
 import 'package:flutter/material.dart';
+
+/*
+Importa o pacote dio
+Adicione a dependência mais recente do "Dio" no 'pubspec.yaml' com ATENÇÃO!
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  dio: ^5.8.0+1
+
+*/
+import 'package:dio/dio.dart';
+
+// Instância do Dio
+final Dio _dio = Dio();
 
 // Função principal do aplicativo, onde a execução começa.
 void main() {
@@ -351,44 +365,135 @@ class _ContactsPage extends State<ContactsPage> {
     );
   }
 
-  // Método para lidar com o envio do formulário.
-  void _submitContactForm() {
-    // Valida todos os campos do formulário associados a _contactsFormKey.
-    // _contactsFormKey.currentState! é usado para acessar o estado atual do formulário.
-    // .validate() executa as funções validator de cada TextFormField e retorna true se todos forem válidos.
+// Método para lidar com o envio do formulário de contato.
+// É assíncrono porque realiza uma operação de rede (HTTP POST).
+  void _submitContactForm() async {
+    // 1. Validação do Formulário:
+    // Verifica se todos os campos do formulário são válidos
+    // de acordo com as regras de 'validator' definidas nos TextFormField.
     if (_contactsFormKey.currentState!.validate()) {
-      // Se todos os campos forem válidos, prossiga com o envio.
-      final name = _nameController.text; // Obtém o texto do campo Nome.
-      final email = _emailController.text; // Obtém o texto do campo E-mail.
-      final subject =
-          _subjectController.text; // Obtém o texto do campo Assunto.
-      final message =
-          _messageController.text; // Obtém o texto do campo Mensagem.
+      // 2. Coleta dos Dados:
+      // Pega o texto atual de cada controlador de campo.
+      final name = _nameController.text;
+      final email = _emailController.text;
+      final subject = _subjectController.text;
+      final message = _messageController.text;
 
-      // Debug: imprime os valores no console (remova depois dos testes ou em ambiente de produção).
-      // kDebugMode é uma constante global que é true apenas em modo de depuração.
-      if (kDebugMode) {
-        print('\n\n----------------');
-        print('Nome: $name');
-        print('Email: $email');
-        print('Assunto: $subject');
-        print('Mensagem: $message');
-        print('----------------\n\n');
+      // 3. Formatação dos Dados para JSON:
+      // Cria um mapa (chave-valor) com os dados do formulário.
+      // As chaves ('name', 'email', etc.) devem corresponder ao que sua API espera.
+      final Map<String, String> formData = {
+        'name': name,
+        'email': email,
+        'subject': subject,
+        'message': message,
+      };
+
+      // 4. Definição da URL da API:
+      // A URL para onde os dados serão enviados.
+      // Lembre-se: 'localhost' para iOS/Web; '10.0.2.2' para Android Emulator.
+      // Nota: Em um projeto real, esta URL estaria em um arquivo de configuração global.
+      final String apiUrl = 'http://localhost:8080/contacts';
+
+      // 5. Bloco de Envio e Tratamento de Erros:
+      // Usa um bloco try-catch para gerenciar possíveis erros durante a requisição de rede.
+      try {
+        // 5.1. Realiza a Requisição POST com Dio:
+        // Envia os dados formatados (Map formData) para a apiUrl.
+        // Dio automaticamente converte o 'Map' em JSON para o corpo da requisição.
+        final Response response = await _dio.post(
+          apiUrl,
+          data: formData,
+          // Define o cabeçalho 'Content-Type' como JSON, informando à API o formato dos dados.
+          options: Options(
+            contentType: Headers.jsonContentType,
+          ),
+        );
+
+        // 5.2. Verificação de 'mounted':
+        // Garante que o widget ainda está ativo na árvore de widgets antes de usar 'context'.
+        // Isso evita erros se o usuário sair da tela antes da resposta da API.
+        if (!mounted) return;
+
+        // 5.3. Processamento da Resposta da API:
+        // Verifica o código de status HTTP da resposta.
+        // 200 (OK) ou 201 (Created) geralmente indicam sucesso.
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          // Exibe uma mensagem de sucesso na parte inferior da tela.
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Mensagem enviada com sucesso!')),
+          );
+          // Limpa os campos do formulário para uma nova entrada.
+          _nameController.clear();
+          _emailController.clear();
+          _subjectController.clear();
+          _messageController.clear();
+        } else {
+          // Se o status não for de sucesso, indica um erro vindo da API.
+          // Imprime detalhes do erro no console apenas em modo de depuração (kDebugMode).
+          if (kDebugMode) {
+            print('Erro ao enviar mensagem: ${response.statusCode}');
+            print('Corpo da resposta: ${response.data}');
+          }
+          // Exibe uma mensagem de falha com o código de status.
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Falha ao enviar mensagem. Status: ${response.statusCode}',
+              ),
+            ),
+          );
+        }
+      } on DioException catch (e) {
+        // 5.4. Tratamento de Erros Específicos do Dio:
+        // Captura exceções lançadas pelo Dio (ex: erros de rede, timeout, etc.).
+
+        // Verifica 'mounted' novamente antes de usar 'context'.
+        if (!mounted) return;
+
+        if (e.response != null) {
+          // Erro com resposta do servidor (ex: 404 Not Found, 500 Internal Server Error).
+          if (kDebugMode) {
+            print('Erro de resposta do Dio: ${e.response!.statusCode}');
+            print('Dados do erro: ${e.response!.data}');
+          }
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Falha ao enviar. Erro do servidor: ${e.response!.statusCode}',
+              ),
+            ),
+          );
+        } else {
+          // Erro sem resposta do servidor (ex: problema de conexão à internet, URL incorreta).
+          if (kDebugMode) {
+            print('Erro de conexão ou configuração do Dio: $e');
+          }
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'Erro de conexão. Verifique sua rede e o servidor.',
+              ),
+            ),
+          );
+        }
+      } catch (e) {
+        // 5.5. Tratamento de Outros Erros Inesperados:
+        // Captura qualquer outra exceção que não seja do tipo DioException.
+
+        // Verifica 'mounted' antes de usar 'context'.
+        if (!mounted) return;
+
+        if (kDebugMode) {
+          print('Erro inesperado: $e');
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Ocorreu um erro inesperado.')),
+        );
       }
-
-      // Adicione a lógica de envio real aqui (ex: enviar para uma API REST, salvar em um banco de dados, etc.).
-      // Por exemplo, mostrar um SnackBar (uma mensagem temporária na parte inferior da tela) para o usuário.
-      ScaffoldMessenger.of(
-        context, // Usa o contexto para encontrar o Scaffold mais próximo e exibir o SnackBar.
-      ).showSnackBar(SnackBar(content: Text('Mensagem enviada por $name!')));
-
-      // Limpa os campos após o envio bem-sucedido.
-      _nameController.clear();
-      _emailController.clear();
-      _subjectController.clear();
-      _messageController.clear();
     } else {
-      // Se houver erros de validação (algum campo não passou no validator), avise o usuário.
+      // 6. Feedback de Validação Falha:
+      // Se o formulário não for válido (algum campo não passou na validação).
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Por favor, preencha todos os campos corretamente.'),
