@@ -9,7 +9,7 @@
       "isbn": "978-0-12-345678-9",
       "status": "ON",
       "cover": "https://picsum.photos/204/304",
-      "price": 94.90,
+      "price": 94.9,
       "id": "1"
     },
     {
@@ -19,7 +19,7 @@
       "author": "Dr. Soneca Profunda",
       "pubyear": 2023,
       "isbn": "978-1-23-456789-0",
-      "status": "OFF",
+      "status": "ON",
       "cover": "https://picsum.photos/203/303",
       "price": 102.25,
       "id": "2"
@@ -33,7 +33,7 @@
       "isbn": "978-2-34-567890-1",
       "status": "ON",
       "cover": "https://picsum.photos/202/302",
-      "price": 60.90,
+      "price": 60.9,
       "id": "3"
     },
     {
@@ -45,7 +45,7 @@
       "isbn": "978-3-45-678901-2",
       "status": "OFF",
       "cover": "https://picsum.photos/201/301",
-      "price": 44.90,
+      "price": 44.9,
       "id": "4"
     },
     {
@@ -57,7 +57,7 @@
       "isbn": "978-4-56-789012-3",
       "status": "ON",
       "cover": "https://picsum.photos/200/300",
-      "price": 210.90,
+      "price": 210.9,
       "id": "5"
     },
     {
@@ -67,9 +67,9 @@
       "author": "Dra. Meia-Verdade",
       "pubyear": 2024,
       "isbn": "978-5-67-890123-4",
-      "status": "ON",
+      "status": "OFF",
       "cover": "https://picsum.photos/199/299",
-      "price": 34.90,
+      "price": 34.9,
       "id": "6"
     },
     {
@@ -81,7 +81,7 @@
       "isbn": "978-6-78-901234-5",
       "status": "OFF",
       "cover": "https://picsum.photos/198/298",
-      "price": 250.90,
+      "price": 250.9,
       "id": "7"
     },
     {
@@ -93,7 +93,7 @@
       "isbn": "978-7-89-012345-6",
       "status": "ON",
       "cover": "https://picsum.photos/197/297",
-      "price": 100.90,
+      "price": 100.9,
       "id": "8"
     },
     {
@@ -105,7 +105,7 @@
       "isbn": "978-8-90-123456-7",
       "status": "OFF",
       "cover": "https://picsum.photos/205/305",
-      "price": 69.90,
+      "price": 69.9,
       "id": "9"
     },
     {
@@ -117,8 +117,20 @@
       "isbn": "978-9-01-234567-8",
       "status": "ON",
       "cover": "https://picsum.photos/196/296",
-      "price": 24.90,
+      "price": 24.9,
       "id": "10"
+    },
+    {
+      "id": "9913",
+      "title": "Aventuras na Floresta Encantada",
+      "author": "Fada Madrinha",
+      "pubyear": 2024,
+      "isbn": "978-85-333-0123-4",
+      "price": 49.9,
+      "description": "Uma emocionante jornada através de florestas místicas e encontros com criaturas mágicas.",
+      "cover": "https://picsum.photos/204/305",
+      "status": "ON",
+      "created_at": "2025-07-01T20:52:13.673953"
     }
   ],
   "contact": []

@@ -1,7 +1,16 @@
+library;
+
+/// Aplicativo principal
+/// Contém a configuração do MaterialApp e as rotas nomeadas
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/home_page.dart';
 import '../pages/contacts_page.dart';
+import '../pages/info_page.dart';
+import '../pages/search_page.dart';
+import '../pages/viewbook_page.dart';
 
 // MyApp é um StatelessWidget, o que significa que seu estado não muda ao longo do tempo.
 // Ele define a estrutura básica do aplicativo, incluindo o tema e as rotas.
@@ -41,6 +50,36 @@ class MyApp extends StatelessWidget {
         // '/pagesf': (context) => const ModelPageSf(),
         // Rota para uma página de contatos.
         '/contacts': (context) => const ContactsPage(),
+        '/search': (context) => const SearchPage(),
+        '/info': (context) => const InfoPage(),
+        // Rota para exibir um livro único identificado pelo Id
+        // Id é passado como argumento
+        '/view': (context) {
+          final args = ModalRoute.of(context)?.settings.arguments;
+          int? bookId;
+          if (args != null) {
+            try {
+              // Tenta converter para String e depois para int
+              bookId = int.tryParse(args.toString());
+            } catch (e) {
+              // Em caso de erro na conversão (se não for uma String numérica)
+              if (kDebugMode) {
+                print('Erro ao converter o ID do livro: $e');
+              }
+            }
+          }
+          // Verifique se a conversão foi bem-sucedida e se bookId não é nulo
+          if (bookId != null) {
+            return ViewBookPage(bookId: bookId);
+          }
+          // Caso contrário, mostra a tela de erro
+          return Scaffold(
+            appBar: AppBar(title: const Text('Erro')),
+            body: const Center(
+              child: Text('ID do livro não fornecido ou inválido.'),
+            ),
+          );
+        },
       },
     );
   }

@@ -1,6 +1,14 @@
+library;
+
+/// Página de contatos
+/// Exibe, processa e envia um formulário de contatos
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+
+import '../template/myappbar.dart';
+import '../template/myfooter.dart';
 
 // Instância do Dio
 final Dio _dio = Dio();
@@ -54,15 +62,7 @@ class _ContactsPage extends State<ContactsPage> {
   // O método build descreve a interface do usuário para esta página.
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Faça Contato',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        centerTitle: true,
-      ),
+      appBar: MyAppBar(title: 'Faça Contato'),
       // Corpo da página, contendo o formulário de contatos.
       body: SingleChildScrollView(
         // SingleChildScrollView garante que a tela role quando o teclado aparecer,
@@ -203,14 +203,14 @@ class _ContactsPage extends State<ContactsPage> {
                   backgroundColor: Colors.blue[600],
                   // Cor de fundo do botão.
                   foregroundColor:
-                  Colors.white, // Cor do texto e ícone do botão.
+                      Colors.white, // Cor do texto e ícone do botão.
                 ),
               ),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: const Text('Rodapé da págna modelo!'),
+      bottomNavigationBar: MyBottomNavBar(),
     );
   }
 

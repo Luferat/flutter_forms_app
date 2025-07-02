@@ -1,11 +1,14 @@
+library;
+
+/// Menu lateral
+/// Pode ser usado em qualquer página. Exemplo de uso:
+///  return Scafold(
+///    drawer: Mydrawer(),
+///    ...
+///  );
+
 import 'package:flutter/material.dart';
 
-// Menu lateral
-// Pode ser usado em qualquer página
-//  return Scafold(
-//    drawer: Mydrawer(),
-//    ...
-//  );
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
@@ -14,6 +17,7 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
+          // Cabeçalho do menu
           DrawerHeader(
             child: Center(
               child: Text(
@@ -22,6 +26,8 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
           ),
+
+          // Acesso à página inicial → '/'
           ListTile(
             title: Text('Inicio'),
             leading: Icon(Icons.home),
@@ -30,6 +36,8 @@ class MyDrawer extends StatelessWidget {
               Navigator.pushNamed(context, '/');
             },
           ),
+
+          // Acesso à página de contatos → '/contacts'
           ListTile(
             title: Text('Contatos'),
             leading: Icon(Icons.contact_mail),
