@@ -6,6 +6,8 @@ library;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../pages/battery.dart';
+import '../pages/device.dart';
 import '../pages/geolocation.dart';
 import '../pages/home_page.dart';
 import '../pages/contacts_page.dart';
@@ -54,6 +56,8 @@ class MyApp extends StatelessWidget {
         '/search': (context) => const SearchPage(),
         '/info': (context) => const InfoPage(),
         '/geolocation': (context) => const MyGPS(),
+        '/battery': (context) => const BattteryView(),
+        '/device':  (context) => const DeviceView(),
         // Rota para exibir um livro único identificado pelo Id
         // Id é passado como argumento
         '/view': (context) {

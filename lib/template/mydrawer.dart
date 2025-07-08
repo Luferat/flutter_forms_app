@@ -50,10 +50,30 @@ class MyDrawer extends StatelessWidget {
           // Acesso à página de do GPS → '/geolocation'
           ListTile(
             title: Text('Localização'),
-            leading: Icon(Icons.contact_mail),
+            leading: Icon(Icons.explore),
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/geolocation');
+            },
+          ),
+
+          // Status da Bateria
+          ListTile(
+            title: Text('Bateria'),
+            leading: Icon(Icons.battery_std),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/battery');
+            },
+          ),
+
+          // Dados do Dispositivo
+          ListTile(
+            title: Text('Dispositivo'),
+            leading: Icon(Icons.mobile_friendly),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/device');
             },
           ),
         ],
