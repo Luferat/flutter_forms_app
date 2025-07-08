@@ -46,6 +46,16 @@ class MyDrawer extends StatelessWidget {
               Navigator.pushNamed(context, '/contacts');
             },
           ),
+
+          // Acesso à página de do GPS → '/geolocation'
+          ListTile(
+            title: Text('Localização'),
+            leading: Icon(Icons.contact_mail),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/geolocation');
+            },
+          ),
         ],
       ),
     );
