@@ -17,7 +17,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
   // Construtor recebe 'title' ou mantém o valor padrão
-  const MyAppBar({super.key, this.title = 'Hello World'});
+  const MyAppBar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

@@ -9,16 +9,20 @@ library;
 
 import 'package:flutter/material.dart';
 
+import 'config.dart';
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: Column(
+        // ⭐️ Mude o ListView para Column para usar Expanded
         children: [
           // Cabeçalho do menu
-          DrawerHeader(
+          const DrawerHeader(
+            // Use const se o conteúdo for estático
             child: Center(
               child: Text(
                 'Meu Aplicativo',
@@ -29,8 +33,8 @@ class MyDrawer extends StatelessWidget {
 
           // Acesso à página inicial → '/'
           ListTile(
-            title: Text('Inicio'),
-            leading: Icon(Icons.home),
+            title: const Text('Inicio'), // Use const
+            leading: const Icon(Icons.home), // Use const
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/');
@@ -39,8 +43,8 @@ class MyDrawer extends StatelessWidget {
 
           // Acesso à página de contatos → '/contacts'
           ListTile(
-            title: Text('Contatos'),
-            leading: Icon(Icons.contact_mail),
+            title: const Text('Contatos'), // Use const
+            leading: const Icon(Icons.contact_mail), // Use const
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/contacts');
@@ -49,8 +53,8 @@ class MyDrawer extends StatelessWidget {
 
           // Acesso à página de do GPS → '/geolocation'
           ListTile(
-            title: Text('Localização'),
-            leading: Icon(Icons.explore),
+            title: const Text('Localização'), // Use const
+            leading: const Icon(Icons.explore), // Use const
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/geolocation');
@@ -59,8 +63,8 @@ class MyDrawer extends StatelessWidget {
 
           // Status da Bateria
           ListTile(
-            title: Text('Bateria'),
-            leading: Icon(Icons.battery_std),
+            title: const Text('Bateria'), // Use const
+            leading: const Icon(Icons.battery_std), // Use const
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/battery');
@@ -69,12 +73,26 @@ class MyDrawer extends StatelessWidget {
 
           // Dados do Dispositivo
           ListTile(
-            title: Text('Dispositivo'),
-            leading: Icon(Icons.mobile_friendly),
+            title: const Text('Dispositivo'), // Use const
+            leading: const Icon(Icons.mobile_friendly), // Use const
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/device');
             },
+          ),
+
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 20.0),
+                child: Text(
+                  '${Config.copyright}\nTodos os direitos reservados',
+                  // ⭐️ AGORA FUNCIONARÁ!
+                  style: TextStyle(fontSize: 12.0, color: Colors.grey[600]),
+                ),
+              ),
+            ),
           ),
         ],
       ),

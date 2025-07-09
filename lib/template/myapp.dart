@@ -14,6 +14,7 @@ import '../pages/contacts_page.dart';
 import '../pages/info_page.dart';
 import '../pages/search_page.dart';
 import '../pages/viewbook_page.dart';
+import 'config.dart';
 
 // MyApp é um StatelessWidget, o que significa que seu estado não muda ao longo do tempo.
 // Ele define a estrutura básica do aplicativo, incluindo o tema e as rotas.
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       // Desliga o modo "Debug" (a faixa vermelha de depuração no canto superior direito).
       // debugShowCheckedModeBanner: false,
       // Título do aplicativo, visível na barra de tarefas do Android ou no switcher de aplicativos.
-      title: 'Hello World',
+      title: Config.appName,
       // Define o tema visual do aplicativo.
       theme: ThemeData(
         // Define a cor primária para o azul.
@@ -43,15 +44,7 @@ class MyApp extends StatelessWidget {
 
       // Define as rotas nomeadas do aplicativo, mapeando nomes de rotas para widgets.
       routes: {
-        // Rota raiz que leva à HomePage.
         '/': (context) => const HomePage(),
-        // Rota de teste que leva à TestPage (atualmente não implementada).
-        // '/test': (context) => const TestPage(),
-        // Rota para a página modelo StatelessWidget.
-        // '/pagesl': (context) => const ModelPageSl(),
-        // Rota para a página modelo StatefulWidget.
-        // '/pagesf': (context) => const ModelPageSf(),
-        // Rota para uma página de contatos.
         '/contacts': (context) => const ContactsPage(),
         '/search': (context) => const SearchPage(),
         '/info': (context) => const InfoPage(),
