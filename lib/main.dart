@@ -1,5 +1,6 @@
-/// Aplicativo principal que implementa a página inicial com lista de livros
 library;
+
+/// Aplicativo principal que implementa a página inicial com lista de livros
 
 import 'package:flutter/material.dart';
 import 'template/myapp.dart';
