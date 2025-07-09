@@ -81,6 +81,16 @@ class MyDrawer extends StatelessWidget {
             },
           ),
 
+          // Biometria
+          ListTile(
+            title: const Text('Biometria'), // Use const
+            leading: const Icon(Icons.mobile_friendly), // Use const
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/biometry');
+            },
+          ),
+
           Expanded(
             child: Align(
               alignment: Alignment.bottomCenter,

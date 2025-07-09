@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/battery.dart';
+import '../pages/biometry.dart';
 import '../pages/device.dart';
 import '../pages/geolocation.dart';
 import '../pages/home_page.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         '/geolocation': (context) => const MyGPS(),
         '/battery': (context) => const BattteryView(),
         '/device':  (context) => const DeviceView(),
+        '/biometry': (context) => const BiometricAuthScreen(),
         // Rota para exibir um livro único identificado pelo Id
         // Id é passado como argumento
         '/view': (context) {
