@@ -1,9 +1,17 @@
+library;
+
+/// Experimentos com o geolocalizador (GPS)
+///     Isso não funciona corretamente na versão Web (Chrome)
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../template/myappbar.dart';
 import '../template/myfooter.dart';
+
+// Nome da página (AppBar)
+final pageName = "Geolocalização";
 
 class MyGPS extends StatefulWidget {
   const MyGPS({super.key});
@@ -90,7 +98,7 @@ class _MyGPS extends State<MyGPS> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: "Geolocalização"),
+      appBar: MyAppBar(title: pageName),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

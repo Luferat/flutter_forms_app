@@ -1,9 +1,17 @@
+library;
+
+/// Motra alguns status do dispositivo
+///     Isso não funciona na versão Web (Chrome)
+
 import 'dart:io'; // Para verificar a plataforma (iOS ou Android)
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 
 import '../template/myappbar.dart';
 import '../template/myfooter.dart';
+
+// Nome da página (AppBar)
+final pageName = 'Informações do Dispositivo';
 
 // ... (seus imports existentes)
 
@@ -47,7 +55,7 @@ class _DeviceView extends State<DeviceView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: 'Informações do Dispositivo'),
+      appBar: MyAppBar(title: pageName),
       bottomNavigationBar: MyBottomNavBar(),
       body: Center(
         child: Column(

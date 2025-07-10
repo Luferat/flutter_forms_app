@@ -1,6 +1,7 @@
 library;
 
-import 'dart:io';
+/// Página inicial do aplicativo
+///     Obtém e exibe a lista de itens da API
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ import 'package:dio/dio.dart';
 import '../template/config.dart';
 import '../template/myappbar.dart';
 import '../template/myfooter.dart';
+
+final pageName = Config.appName;
 
 final _dio = Dio();
 
@@ -26,21 +29,11 @@ class _HomePage extends State<HomePage> {
   bool _isLoading = true;
   String? _error;
 
-  // Endpoint da API conforme a plataforma
-  final String _apiUrl = kIsWeb
-      ? 'http://localhost:8080/books?status=ON&_sort=created_at' // Para Web
-      : (Platform.isAndroid
-      ? 'http://10.0.2.2:8080/books?status=ON&_sort=created_at' // Para Emulador Android
-      : 'http://localhost:8080/books?status=ON&_sort=created_at'); // Para Outros Nativos (iOS Simulator, Windows, etc.)
-
   @override
   void initState() {
     super.initState();
-    _fetchBooks(); // Agora _apiUrl já estará inicializado quando _fetchBooks for chamado
+    _fetchBooks();
   }
-
-  // Restante do seu código _fetchBooks() e build() permanece o mesmo
-  // ...
 
   // Método para buscar os livros da API
   Future<void> _fetchBooks() async {
@@ -52,7 +45,7 @@ class _HomePage extends State<HomePage> {
 
     try {
       // ⭐️ _apiUrl agora tem certeza de não ser nulo aqui
-      final Response response = await _dio.get(_apiUrl);
+      final Response response = await _dio.get(Config.endPoint['listAll'],);
 
       // Debug: Mostra no terminal, os dados recebidos, já como List<Map>
       if (kDebugMode) {
@@ -112,7 +105,7 @@ class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: Config.appName,),
+      appBar: MyAppBar(title: pageName,),
       body: _isLoading
           ? const Center(
         child: CircularProgressIndicator(),

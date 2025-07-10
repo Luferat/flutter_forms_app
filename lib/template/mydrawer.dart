@@ -51,9 +51,23 @@ class MyDrawer extends StatelessWidget {
             },
           ),
 
+          // Acesso à página de contatos → '/contacts'
+          ListTile(
+            title: const Text('Informações'), // Use const
+            leading: const Icon(Icons.info), // Use const
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/info');
+            },
+          ),
+
+
+          // Linha divisória
+          const Divider(),
+
           // Acesso à página de do GPS → '/geolocation'
           ListTile(
-            title: const Text('Localização'), // Use const
+            title: const Text('Localização (GPS)'), // Use const
             leading: const Icon(Icons.explore), // Use const
             onTap: () {
               Navigator.pop(context);
@@ -63,7 +77,7 @@ class MyDrawer extends StatelessWidget {
 
           // Status da Bateria
           ListTile(
-            title: const Text('Bateria'), // Use const
+            title: const Text('Informações da Bateria'), // Use const
             leading: const Icon(Icons.battery_std), // Use const
             onTap: () {
               Navigator.pop(context);
@@ -73,7 +87,7 @@ class MyDrawer extends StatelessWidget {
 
           // Dados do Dispositivo
           ListTile(
-            title: const Text('Dispositivo'), // Use const
+            title: const Text('Informações do Dispositivo'), // Use const
             leading: const Icon(Icons.mobile_friendly), // Use const
             onTap: () {
               Navigator.pop(context);
@@ -84,7 +98,7 @@ class MyDrawer extends StatelessWidget {
           // Biometria
           ListTile(
             title: const Text('Biometria'), // Use const
-            leading: const Icon(Icons.mobile_friendly), // Use const
+            leading: const Icon(Icons.fingerprint), // Use const
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/biometry');

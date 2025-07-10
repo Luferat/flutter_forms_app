@@ -1,17 +1,21 @@
 library;
 
 /// Página de contatos
-/// Exibe, processa e envia um formulário de contatos
+///     Exibe, processa e envia um formulário de contatos
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
+import '../template/config.dart';
 import '../template/myappbar.dart';
 import '../template/myfooter.dart';
 
 // Instância do Dio
 final Dio _dio = Dio();
+
+// Nome da página (AppBar)
+final pageName = 'Faça contato';
 
 // Página de Contatos do tipo StatefulWidget.
 // Esta página contém um formulário para coletar informações de contato.
@@ -40,13 +44,6 @@ class _ContactsPage extends State<ContactsPage> {
   final TextEditingController _subjectController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
 
-  // Expressão Regular (Regex) para validação de e-mail.
-  // Esta é uma Regex bem comum na Web e razoavelmente robusta para e-mails.
-  // Ajuste para seu "case" se necessário.
-  final RegExp _emailRegex = RegExp(
-    r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-  );
-
   @override
   void dispose() {
     // IMPORTANTE! Libera os controladores quando o widget for descartado (removido da árvore de widgets).
@@ -62,7 +59,7 @@ class _ContactsPage extends State<ContactsPage> {
   // O método build descreve a interface do usuário para esta página.
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: 'Faça Contato'),
+      appBar: MyAppBar(title: pageName),
       // Corpo da página, contendo o formulário de contatos.
       body: SingleChildScrollView(
         // SingleChildScrollView garante que a tela role quando o teclado aparecer,
@@ -123,7 +120,7 @@ class _ContactsPage extends State<ContactsPage> {
                     return 'Por favor, escreva seu e-mail.';
                   }
                   // Validação de e-mail usando a expressão regular.
-                  if (!_emailRegex.hasMatch(value)) {
+                  if (!Config.emailRegex.hasMatch(value)) {
                     return 'Por favor, insira um email válido.';
                   }
                   // Retorne null se a validação passar.
@@ -238,12 +235,6 @@ class _ContactsPage extends State<ContactsPage> {
         'message': message,
       };
 
-      // 4. Definição da URL da API:
-      // A URL para onde os dados serão enviados.
-      // Lembre-se: 'localhost' para iOS/Web; '10.0.2.2' para Android Emulator.
-      // Nota: Em um projeto real, esta URL estaria em um arquivo de configuração global.
-      final String apiUrl = 'http://localhost:8080/contacts';
-
       // 5. Bloco de Envio e Tratamento de Erros:
       // Usa um bloco try-catch para gerenciar possíveis erros durante a requisição de rede.
       try {
@@ -251,7 +242,7 @@ class _ContactsPage extends State<ContactsPage> {
         // Envia os dados formatados (Map formData) para a apiUrl.
         // Dio automaticamente converte o 'Map' em JSON para o corpo da requisição.
         final Response response = await _dio.post(
-          apiUrl,
+          Config.endPoint['contact'],
           data: formData,
           // Define o cabeçalho 'Content-Type' como JSON, informando à API o formato dos dados.
           options: Options(contentType: Headers.jsonContentType),

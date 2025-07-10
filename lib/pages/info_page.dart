@@ -1,11 +1,13 @@
 library;
 
-/// Pagina stateless que implementará a página de informações
+/// Pagina stateless que implementará a página de informações do aplicativo
 
 import 'package:flutter/material.dart';
 
 import '../template/myappbar.dart';
 import '../template/myfooter.dart';
+
+final pageName = 'Informações';
 
 // Página modelo do tipo Stateless
 // Use como modelo para criar novas páginas Stateless no aplicativo
@@ -16,7 +18,7 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: 'informações'),
+      appBar: MyAppBar(title: pageName),
 
       body: Center(
         child: Column(

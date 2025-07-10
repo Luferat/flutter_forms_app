@@ -7,6 +7,8 @@ import '../template/myappbar.dart';
 import '../template/mydrawer.dart';
 import '../template/myfooter.dart';
 
+final pageName = 'Pesquisar';
+
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
@@ -26,7 +28,7 @@ class _SearchPage extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: 'Pesquisar'),
+      appBar: MyAppBar(title: pageName),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

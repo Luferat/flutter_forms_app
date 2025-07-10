@@ -1,14 +1,15 @@
 library;
 
 /// Visualizar livro
-/// Exibe todos os detalhes de um livro identificado pelo Id
-/// O é passado como argumento da rota e processado por 'myapp.dart'
+///     Exibe todos os detalhes de um livro identificado pelo Id
+///     O Id é passado como argumento da rota e processado por 'myapp.dart'
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
+import '../template/config.dart';
 import '../template/myappbar.dart';
 import '../template/myfooter.dart'; // Para kDebugMode
 
@@ -46,18 +47,16 @@ class _ViewBookPage extends State<ViewBookPage> {
       _error = null;
     });
 
-    // URL da API para buscar um livro específico pelo ID
-    // Ex: http://localhost:8080/books/1
-    final String apiUrl = 'http://localhost:8080/books/${widget.bookId}';
-
     try {
-      final Response response = await _dio.get(apiUrl);
+      final Response response = await _dio.get('${Config.endPoint['listOne']}${widget.bookId}');
 
       if (!mounted) return; // Verifica se o widget ainda está montado
 
       if (response.statusCode == 200) {
         setState(() {
-          _bookDetails = response.data; // Dio já faz o parsing do JSON
+          // Dio já faz o parsing do JSON
+          // O índice [0] é necessário por conta do response JSON do "json-server"
+          _bookDetails = response.data[0];
           _isLoading = false;
         });
       } else {

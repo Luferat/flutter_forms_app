@@ -1,8 +1,15 @@
+library;
+
+/// Experimentos com monitoramento da bateria
+///     Isso não funciona corretamente na versão Web (Chrome)
+
 import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
 
 import '../template/myappbar.dart';
 import '../template/myfooter.dart';
+
+final pageName = 'Bateria';
 
 class BattteryView extends StatefulWidget {
   const BattteryView({super.key});
@@ -58,7 +65,7 @@ class _BattteryView extends State<BattteryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: 'Bateria'),
+      appBar: MyAppBar(title: pageName),
       bottomNavigationBar: MyBottomNavBar(),
       body: Center(
         child: Column(

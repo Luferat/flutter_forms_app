@@ -1,15 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:local_auth/local_auth.dart';
-import 'package:local_auth_android/local_auth_android.dart'; // Para customizar prompts Android
+library;
 
-class BiometricAuthScreen extends StatefulWidget {
-  const BiometricAuthScreen({super.key});
+/// Experimento com biometria
+///     Isso só funciona com dispositivos com biometria habilitada.
+///     Não funciona na versão Web (Chrome)
+
+import 'package:flutter/material.dart';
+import 'package:flutter_forms_app/template/myappbar.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:local_auth_android/local_auth_android.dart';
+
+import '../template/myfooter.dart'; // Para customizar prompts Android
+
+final pageName = 'Autenticação Biométrica';
+
+class BiometricAuth extends StatefulWidget {
+  const BiometricAuth({super.key});
 
   @override
-  State<BiometricAuthScreen> createState() => _BiometricAuthScreenState();
+  State<BiometricAuth> createState() => _BiometricAuthState();
 }
 
-class _BiometricAuthScreenState extends State<BiometricAuthScreen> {
+class _BiometricAuthState extends State<BiometricAuth> {
   final LocalAuthentication auth = LocalAuthentication();
   String _authorized = 'Não autorizado';
 
@@ -95,9 +106,7 @@ class _BiometricAuthScreenState extends State<BiometricAuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Autenticação Biométrica'),
-      ),
+      appBar: MyAppBar(title: pageName),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -134,6 +143,7 @@ class _BiometricAuthScreenState extends State<BiometricAuthScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: MyBottomNavBar(),
     );
   }
 }

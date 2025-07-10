@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
         '/geolocation': (context) => const MyGPS(),
         '/battery': (context) => const BattteryView(),
         '/device':  (context) => const DeviceView(),
-        '/biometry': (context) => const BiometricAuthScreen(),
+        '/biometry': (context) => const BiometricAuth(),
         // Rota para exibir um livro único identificado pelo Id
         // Id é passado como argumento
         '/view': (context) {
