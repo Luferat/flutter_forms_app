@@ -18,11 +18,8 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
-        // ⭐️ Mude o ListView para Column para usar Expanded
         children: [
-          // Cabeçalho do menu
           const DrawerHeader(
-            // Use const se o conteúdo for estático
             child: Center(
               child: Text(
                 Config.appName,
@@ -33,8 +30,8 @@ class MyDrawer extends StatelessWidget {
 
           // Acesso à página inicial → '/'
           ListTile(
-            title: const Text('Inicio'), // Use const
-            leading: const Icon(Icons.home), // Use const
+            title: const Text('Inicio'),
+            leading: const Icon(Icons.home),
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/');
@@ -43,18 +40,18 @@ class MyDrawer extends StatelessWidget {
 
           // Acesso à página de contatos → '/contacts'
           ListTile(
-            title: const Text('Contatos'), // Use const
-            leading: const Icon(Icons.contact_mail), // Use const
+            title: const Text('Contatos'),
+            leading: const Icon(Icons.contact_mail),
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/contacts');
             },
           ),
 
-          // Acesso à página de contatos → '/contacts'
+          // Acesso à página de informações → '/info'
           ListTile(
-            title: const Text('Informações'), // Use const
-            leading: const Icon(Icons.info), // Use const
+            title: const Text('Informações'),
+            leading: const Icon(Icons.info),
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/info');
@@ -67,8 +64,8 @@ class MyDrawer extends StatelessWidget {
 
           // Acesso à página de do GPS → '/geolocation'
           ListTile(
-            title: const Text('Localização (GPS)'), // Use const
-            leading: const Icon(Icons.explore), // Use const
+            title: const Text('Localização (GPS)'),
+            leading: const Icon(Icons.explore),
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/geolocation');
@@ -77,8 +74,8 @@ class MyDrawer extends StatelessWidget {
 
           // Status da Bateria
           ListTile(
-            title: const Text('Informações da Bateria'), // Use const
-            leading: const Icon(Icons.battery_std), // Use const
+            title: const Text('Informações da Bateria'),
+            leading: const Icon(Icons.battery_std),
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/battery');
@@ -87,8 +84,8 @@ class MyDrawer extends StatelessWidget {
 
           // Dados do Dispositivo
           ListTile(
-            title: const Text('Informações do Dispositivo'), // Use const
-            leading: const Icon(Icons.mobile_friendly), // Use const
+            title: const Text('Informações do Dispositivo'),
+            leading: const Icon(Icons.mobile_friendly),
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/device');
@@ -97,8 +94,8 @@ class MyDrawer extends StatelessWidget {
 
           // Biometria
           ListTile(
-            title: const Text('Biometria'), // Use const
-            leading: const Icon(Icons.fingerprint), // Use const
+            title: const Text('Biometria'),
+            leading: const Icon(Icons.fingerprint),
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/biometry');
@@ -112,7 +109,6 @@ class MyDrawer extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 20.0),
                 child: Text(
                   '${Config.copyright}\nTodos os direitos reservados',
-                  // ⭐️ AGORA FUNCIONARÁ!
                   style: TextStyle(fontSize: 12.0, color: Colors.grey[600]),
                 ),
               ),
