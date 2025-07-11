@@ -25,7 +25,7 @@ class MyDrawer extends StatelessWidget {
             // Use const se o conteúdo for estático
             child: Center(
               child: Text(
-                'Meu Aplicativo',
+                Config.appName,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26.0),
               ),
             ),

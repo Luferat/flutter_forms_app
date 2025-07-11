@@ -47,6 +47,7 @@ class _HomePage extends State<HomePage> {
       // ⭐️ _apiUrl agora tem certeza de não ser nulo aqui
       final Response response = await _dio.get(Config.endPoint['listAll'],);
 
+      /*
       // Debug: Mostra no terminal, os dados recebidos, já como List<Map>
       if (kDebugMode) {
         print('\n\n--------------------');
@@ -57,6 +58,7 @@ class _HomePage extends State<HomePage> {
         print(response.data); // Dados do response
         print('--------------------\n\n');
       }
+      */
 
       // Verifica se o widget ainda está montado antes de atualizar o estado
       if (!mounted) return;
